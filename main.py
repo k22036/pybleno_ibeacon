@@ -26,7 +26,7 @@ bleno = Bleno()
 def onStateChange(state):
     if state == 'poweredOn':
         # iBeaconの広告を開始
-        bleno.startAdvertisingWithEIRData(ibeacon_packet)
+        bleno.startAdvertisingWithEIRData(ibeacon_packet, bytes([]))
     else:
         bleno.stopAdvertising()
 
