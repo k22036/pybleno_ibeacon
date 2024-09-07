@@ -14,7 +14,7 @@ ibeacon_prefix = bytes([
 uuid = bytes.fromhex('e2c56db5dffb48d2b060d0f5a71096e0')
 major = (1).to_bytes(2, byteorder='big')
 minor = (1).to_bytes(2, byteorder='big')
-tx_power = (200).to_bytes(1, byteorder='big', signed=True)
+tx_power = (200).to_bytes(1, byteorder='big')
 
 # 完全なiBeaconパケット
 ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
@@ -22,12 +22,14 @@ ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
 # Blenoの初期化
 bleno = Bleno()
 
+
 def onStateChange(state):
     if state == 'poweredOn':
         # iBeaconの広告を開始
         bleno.startAdvertisingWithEIRData(ibeacon_packet)
     else:
         bleno.stopAdvertising()
+
 
 bleno.on('stateChange', onStateChange)
 
